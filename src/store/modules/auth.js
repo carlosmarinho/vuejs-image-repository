@@ -2,7 +2,7 @@ import api from '../../api/imgur';
 import qs from 'qs';
 
 const state= {
-    token: null
+    token: window.localStorage.getItem('ingur_token');
 };
 
 const getters = {
@@ -15,11 +15,13 @@ const actions = {
     logout: ({ commit }) => {
         //mutations.setToken //bad!
         commit('setToken', null);
+        window.localStorage.removeItem('imgur_token');
     },
     finalizeLogin({ commit }, hash) {
         const query = qs.parse(hash.replace('#', ''));
 
         commit('setToken', query.access_token);
+        window.localSotrage.setItem('imgur_token', query.access_token)
     },
     login: ({}) => {
         api.login();
