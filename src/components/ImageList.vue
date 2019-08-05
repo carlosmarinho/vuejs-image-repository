@@ -5,7 +5,13 @@
 </template>
 
 <script>
-    export default{
-        name: 'ImageList'
+import { mapActions } from 'vuex';
+
+export default{
+    name: 'ImageList',
+    methods: mapActions(['fetchImages']),
+    created() {
+        this.fetchImages();
     }
+}
 </script>
